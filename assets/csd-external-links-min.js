@@ -1,0 +1,1 @@
+jQuery((function(t){var r=["csd509j.net","https://teachcorvallis.org"];t('a[href^="http"]').on("click",(function(n){var a=t(this).attr("href");void 0===r.find((function(t){var r=new RegExp(t);return null!==a.match(r)}))&&(n.preventDefault(),t("#externalLink").attr("href",t(this).attr("href")),t("#modalNotification").modal("show"))}))}));
