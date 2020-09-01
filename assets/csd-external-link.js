@@ -1,13 +1,14 @@
 jQuery(function ($) {	
 	// External Link Pop-up with domains to whitelist
-	var domains = ['csd509j.net', 'https://teachcorvallis.org', 'https://www.parentsquare.com/'];
-	
+	var domains = ['csd509j.net', 'https://teachcorvallis.org', 'https://www.parentsquare.com'];
+	console.log('made it');
 	$('a[href^="http"]').on('click', function (e) {
 		
 		var link = $(this).attr('href');
 		
 		var external = domains.find( function (domain) {
 			var reg = new RegExp( domain );
+			
 			return link.match(reg) !== null;		
 		});
 	
