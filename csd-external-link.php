@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CSD Functions - External Link
-Version: 1.0
+Version: 1.1
 Description: Display pop-up message when leaving district websites.
 Author: Josh Armentano
 Author URI: https://abidewebdesign.com
