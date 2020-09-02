@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CSD Functions - External Link
-Version: 1.2
+Version: 1.3
 Description: Display pop-up message when leaving district websites.
 Author: Josh Armentano
 Author URI: https://abidewebdesign.com
@@ -19,10 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function external_link_enqueue_script() {
-	
-	$plugin = get_plugin_data( __FILE__, false, false );
-	
-	wp_enqueue_script( 'external-link.js', plugin_dir_url( __FILE__ ) . 'assets/csd-external-link-min.js', '', '', true );
+		
+	if ( !is_page('select-language') ) {
+
+		$plugin = get_plugin_data( __FILE__, false, false );
+		
+		wp_enqueue_script( 'external-link.js', plugin_dir_url( __FILE__ ) . 'assets/csd-external-link-min.js', '', '', true );
+		
+	}
 	
 }
 
@@ -31,28 +35,31 @@ add_action( 'wp_enqueue_scripts', 'external_link_enqueue_script' );
 
 function add_modal_function() {
 	
-	$content = 
-		'<div class="modal fade" id="modalNotification" tabindex="-1" role="dialog" aria-labelledby="modalNotification" aria-hidden="true">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="modalNotificationLable">' . __('Notice','csdschools') . '</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p class="mb-0">' . get_field('external_link_notification', 'options') . '</p>
-					</div>
-					<div class="modal-footer">
-						<a id="externalLink" href="#" class="btn btn-primary btn-block">' . __('Proceed','csdschools') . '</a>
+	if ( !is_page('select-language') ) {
+		
+		$content = 
+			'<div class="modal fade" id="modalNotification" tabindex="-1" role="dialog" aria-labelledby="modalNotification" aria-hidden="true">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalNotificationLable">' . __('Notice','csdschools') . '</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p class="mb-0">' . get_field('external_link_notification', 'options') . '</p>
+						</div>
+						<div class="modal-footer">
+							<a id="externalLink" href="#" class="btn btn-primary btn-block">' . __('Proceed','csdschools') . '</a>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>';
+			</div>';
+			
+		echo $content;
 		
-  echo $content;
-
+	}
 }
 
 add_action('wp_footer', 'add_modal_function');
